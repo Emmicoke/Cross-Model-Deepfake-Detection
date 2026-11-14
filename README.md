@@ -1,7 +1,7 @@
 # Cross-Model Deepfake Detection via Frequency-Domain Fourier Artifact Analysis
 
 BIL539 Artificial Intelligence term project (2026-2027 Fall), Fahrettin Emin Korkut.
-First stage of a master's thesis on cross-model deepfake detection: can a light detector trained on one
+Cross-model deepfake detection: can a light detector trained on one
 generator (e.g. Stable Diffusion) tell real from synthetic images made by *other* generators, using only
 2-D FFT spectrum artefacts?
 
