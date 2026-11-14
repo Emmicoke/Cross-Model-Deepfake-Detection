@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+data/*
+!data/README.md
+cache/
+checkpoints/
+.ipynb_checkpoints/
+*.pt
+results/*
+!results/.gitkeep
