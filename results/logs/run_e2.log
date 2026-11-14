@@ -1,0 +1,60 @@
+== e2_naive_majority_s42  15:11:30
+-> results\g281\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e2_naive_stats_s42  15:12:49
+-> results\g281\results.csv  (ood_gap=0.0023, 0.1672 ms/img, 0s train)
+== e2_pixel_logreg_s42  15:13:29
+-> results\g281\results.csv  (ood_gap=-0.0722, 0.1163 ms/img, 0s train)
+== e2_lbp_logreg_s42  15:14:09
+-> results\g281\results.csv  (ood_gap=0.1027, 8.7031 ms/img, 12s train)
+== e2_lbp_svm_s42  15:17:18
+-> results\g281\results.csv  (ood_gap=0.088, 9.0614 ms/img, 11s train)
+== e2_fft_radial_logreg_s42  15:20:20
+-> results\g281\results.csv  (ood_gap=0.0354, 3.2903 ms/img, 4s train)
+== e2_fft_mlp_s42  15:21:48
+-> results\g281\results.csv  (ood_gap=0.0935, 3.166 ms/img, 7s train)
+== e2_fft_resnet18_s42  15:23:17
+-> results\g281\results.csv  (ood_gap=0.1376, 4.8269 ms/img, 54s train)
+== e2_pixel_resnet18_s42  15:26:35
+-> results\g281\results.csv  (ood_gap=0.0874, 1.7371 ms/img, 86s train)
+== e2_fft_resnet18_aug_s42  15:29:41
+-> results\g281\results.csv  (ood_gap=0.0911, 4.7257 ms/img, 47s train)
+== e2_naive_majority_s43  15:32:54
+-> results\g281\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e2_naive_stats_s43  15:33:30
+-> results\g281\results.csv  (ood_gap=0.005, 0.1637 ms/img, 0s train)
+== e2_pixel_logreg_s43  15:34:08
+-> results\g281\results.csv  (ood_gap=-0.0406, 0.1101 ms/img, 0s train)
+== e2_lbp_logreg_s43  15:34:45
+-> results\g281\results.csv  (ood_gap=0.1181, 8.9306 ms/img, 13s train)
+== e2_lbp_svm_s43  15:37:48
+-> results\g281\results.csv  (ood_gap=0.0993, 8.816 ms/img, 11s train)
+== e2_fft_radial_logreg_s43  15:40:48
+-> results\g281\results.csv  (ood_gap=0.0341, 3.1307 ms/img, 5s train)
+== e2_fft_mlp_s43  15:42:16
+-> results\g281\results.csv  (ood_gap=0.0946, 3.2146 ms/img, 7s train)
+== e2_fft_resnet18_s43  15:43:45
+-> results\g281\results.csv  (ood_gap=0.1316, 4.7801 ms/img, 94s train)
+== e2_pixel_resnet18_s43  15:47:47
+-> results\g281\results.csv  (ood_gap=0.14, 1.7437 ms/img, 90s train)
+== e2_fft_resnet18_aug_s43  15:50:56
+-> results\g281\results.csv  (ood_gap=0.1444, 4.7225 ms/img, 56s train)
+== e2_naive_majority_s44  15:54:17
+-> results\g281\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e2_naive_stats_s44  15:54:51
+-> results\g281\results.csv  (ood_gap=0.005, 0.1628 ms/img, 0s train)
+== e2_pixel_logreg_s44  15:55:29
+-> results\g281\results.csv  (ood_gap=-0.0223, 0.1115 ms/img, 0s train)
+== e2_lbp_logreg_s44  15:56:07
+-> results\g281\results.csv  (ood_gap=0.114, 9.1347 ms/img, 13s train)
+== e2_lbp_svm_s44  15:59:11
+-> results\g281\results.csv  (ood_gap=0.1039, 9.5905 ms/img, 12s train)
+== e2_fft_radial_logreg_s44  16:02:12
+-> results\g281\results.csv  (ood_gap=0.0442, 3.2354 ms/img, 5s train)
+== e2_fft_mlp_s44  16:03:39
+-> results\g281\results.csv  (ood_gap=0.0988, 3.1406 ms/img, 7s train)
+== e2_fft_resnet18_s44  16:05:09
+-> results\g281\results.csv  (ood_gap=0.0872, 4.765 ms/img, 50s train)
+== e2_pixel_resnet18_s44  16:08:23
+-> results\g281\results.csv  (ood_gap=0.17, 1.7213 ms/img, 87s train)
+== e2_fft_resnet18_aug_s44  16:11:29
+-> results\g281\results.csv  (ood_gap=0.0795, 4.7211 ms/img, 60s train)

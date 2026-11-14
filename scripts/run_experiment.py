@@ -6,12 +6,34 @@ Example:
       --ood data/ood/synthbuster_mj data/ood/genimage_adm --size 32 --seed 42
 `--train-root` must contain train/ and test/ (each with real/ and fake/).
 """
-import argparse, resource, sys, time
+import argparse, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from fftdet import data, models, metrics
 from fftdet.augment import augment_batch
+
+
+def peak_rss_mb():
+    """Peak resident memory of this process in MB (resource is Unix-only; psutil/ctypes fallback on Windows)."""
+    try:
+        import resource
+        r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return round(r / 2**20 if sys.platform == "darwin" else r / 1024, 1)
+    except ImportError:
+        pass
+    try:
+        import ctypes
+        from ctypes import wintypes
+        class PMC(ctypes.Structure):
+            _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD)] +                        [(n, ctypes.c_size_t) for n in ("PeakWorkingSetSize", "WorkingSetSize", "QuotaPeakPagedPoolUsage",
+                        "QuotaPagedPoolUsage", "QuotaPeakNonPagedPoolUsage", "QuotaNonPagedPoolUsage",
+                        "PagefileUsage", "PeakPagefileUsage")]
+        c = PMC(); c.cb = ctypes.sizeof(PMC)
+        ctypes.windll.psapi.GetProcessMemoryInfo(ctypes.windll.kernel32.GetCurrentProcess(), ctypes.byref(c), c.cb)
+        return round(c.PeakWorkingSetSize / 2**20, 1)
+    except Exception:
+        return ""
 
 
 def main():
@@ -57,7 +79,9 @@ def main():
     sets.update({Path(p).name: p for p in a.ood})
     row = dict(exp_id=exp_id, model=a.model, seed=a.seed, size=a.size, augment=a.augment,
                n_train=len(ytr), epochs=a.epochs if a.model in models.TORCH_KINDS else "", notes=a.notes)
-    Path("results/scores").mkdir(parents=True, exist_ok=True)
+    out = Path(a.out)
+    score_dir = out.parent / "scores"            # scores live next to the csv, so --out keeps experiments apart
+    score_dir.mkdir(parents=True, exist_ok=True)
     aucs = {}
     for name, path in sets.items():
         X, y, _ = data.load_dataset(path, a.size, a.max_test_per_class, a.seed)
@@ -67,7 +91,7 @@ def main():
         for k, v in m.items():
             row[f"{k}_{name}"] = round(float(v), 4)
         row[f"n_{name}"] = len(y)
-        np.savez_compressed(f"results/scores/{exp_id}__{name}.npz", y=y, score=s)
+        np.savez_compressed(score_dir / f"{exp_id}__{name}.npz", y=y, score=s)
         print(f"  {name:>20s}: acc={m['acc']:.4f} f1={m['f1']:.4f} auc={m['auc']:.4f}")
         if name == "id":
             Xt = X[:256]
@@ -78,7 +102,7 @@ def main():
         row[f"recall_{name}"] = round(float((s >= 0.5).mean()), 4)
         row[f"meanscore_{name}"] = round(float(s.mean()), 4)
         row[f"n_{name}"] = len(y)
-        np.savez_compressed(f"results/scores/{exp_id}__{name}.npz", y=y, score=s)
+        np.savez_compressed(score_dir / f"{exp_id}__{name}.npz", y=y, score=s)
         print(f"  {name:>20s}: recall(fake)={row[f'recall_{name}']:.4f} (fake-only set, no AUC)")
     ood = [v for k, v in aucs.items() if k != "id"]
     row["auc_ood_mean"] = round(float(np.mean(ood)), 4) if ood else ""
@@ -86,14 +110,13 @@ def main():
     row["params"] = model.n_params()
     row["train_time_s"] = round(train_s, 1)
     row["ms_per_img"] = round(metrics.timed(lambda: model.score(Xt), len(Xt)), 4)
-    row["peak_rss_mb"] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+    row["peak_rss_mb"] = peak_rss_mb()
     try:
         import torch
         row["peak_gpu_mb"] = round(torch.cuda.max_memory_allocated() / 2**20, 1) if torch.cuda.is_available() else ""
     except Exception:
         row["peak_gpu_mb"] = ""
 
-    out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
     df = pd.DataFrame([row])
     if out.exists():
         old = pd.read_csv(out)

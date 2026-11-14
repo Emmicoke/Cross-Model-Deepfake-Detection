@@ -1,0 +1,67 @@
+{
+  "real:adm/nature": {
+    "found": 954,
+    "duplicate": 0,
+    "unreadable": 0,
+    "skipped_small": 80,
+    "kept": 874
+  },
+  "real:stable_diffusion_v_1_5/nature": {
+    "found": 909,
+    "duplicate": 18,
+    "unreadable": 1,
+    "skipped_small": 66,
+    "kept": 824
+  },
+  "real:wukong/nature": {
+    "found": 998,
+    "duplicate": 0,
+    "unreadable": 0,
+    "skipped_small": 104,
+    "kept": 894
+  },
+  "fake:stable_diffusion_v_1_5/ai": {
+    "found": 996,
+    "unreadable": 0,
+    "skipped_small": 0,
+    "kept": 996
+  },
+  "fake:adm/ai": {
+    "found": 968,
+    "unreadable": 0,
+    "skipped_small": 0,
+    "kept": 968
+  },
+  "fake:wukong/ai": {
+    "found": 958,
+    "unreadable": 0,
+    "skipped_small": 0,
+    "kept": 958
+  }
+}
+{
+  "g281/train": {
+    "real": 796,
+    "fake": 796,
+    "unused_real": 240,
+    "unused_fake": 0
+  },
+  "g281/test": {
+    "real": 200,
+    "fake": 200,
+    "unused_real": 60,
+    "unused_fake": 0
+  },
+  "ood/g281_adm": {
+    "real": 648,
+    "fake": 648,
+    "unused_real": 0,
+    "unused_fake": 320
+  },
+  "ood/g281_wukong": {
+    "real": 648,
+    "fake": 648,
+    "unused_real": 0,
+    "unused_fake": 310
+  }
+}

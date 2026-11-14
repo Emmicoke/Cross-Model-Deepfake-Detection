@@ -18,15 +18,28 @@ import numpy as np
 from PIL import Image
 
 
+def class_names(pf):
+    """ClassLabel id -> name maps from the HuggingFace schema metadata ({} if the column is not a ClassLabel)."""
+    md = pf.schema_arrow.metadata or {}
+    feats = json.loads(md[b"huggingface"].decode()).get("info", {}).get("features", {}) if b"huggingface" in md else {}
+    return {col: dict(enumerate(f["names"])) for col, f in feats.items()
+            if isinstance(f, dict) and f.get("_type") == "ClassLabel" and "names" in f}
+
+
 def rows(parquet_dir):
+    """Yield (image bytes, label name, generator name, file). Tiny-GenImage stores label and generator as int
+    ClassLabels (label: 0=real 1=fake; generator: 0=Real 1=ADM ... 6=SD15 ...), so ids are mapped to names."""
     import pyarrow.parquet as pq
     for f in sorted(Path(parquet_dir).glob("*.parquet")):
         pf = pq.ParquetFile(f)
-        names = pf.schema_arrow.names
+        cn = class_names(pf)
         for batch in pf.iter_batches(batch_size=256):
             d = batch.to_pydict()
             for i in range(len(d["image"])):
-                yield d["image"][i]["bytes"], d["label"][i], d["generator"][i], names, f.name
+                lab, gen = d["label"][i], d["generator"][i]
+                lab = cn.get("label", {}).get(lab, lab)
+                gen = cn.get("generator", {}).get(gen, gen)
+                yield d["image"][i]["bytes"], lab, gen, f.name
 
 
 def main():
@@ -47,8 +60,8 @@ def main():
     items = []                      # (gen_name, is_fake, path)
     label_names = gen_names = None
     kept_fake = defaultdict(int)
-    for n, (b, label, gen, _, _) in enumerate(rows(a.parquet_dir)):
-        # label/generator may be ints (ClassLabel) or strings
+    for n, (b, label, gen, _) in enumerate(rows(a.parquet_dir)):
+        # label/generator are mapped to names in rows() when stored as ClassLabel ints
         gen = str(gen); is_fake = str(label).lower() in ("1", "fake")
         key = "REAL" if not is_fake else gen
         if is_fake and kept_fake[gen] >= a.max_per_gen:

@@ -1,0 +1,25 @@
+{
+  "name": "tinygen_train",
+  "counts": {
+    "real": 2000,
+    "fake": 2000
+  },
+  "formats": {
+    "real": {
+      ".png": 2000
+    },
+    "fake": {
+      ".png": 2000
+    }
+  },
+  "size": 256,
+  "pixel_mean": {
+    "real": 0.44726458191871643,
+    "fake": 0.4383160471916199
+  },
+  "pixel_var": {
+    "real": 0.06657955795526505,
+    "fake": 0.07336374372243881
+  },
+  "radial_profile_l2_gap": 2.0218632221221924
+}

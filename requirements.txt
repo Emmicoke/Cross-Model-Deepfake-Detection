@@ -7,3 +7,6 @@ matplotlib
 tqdm
 torch
 torchvision
+huggingface_hub
+pyarrow
+tabulate
