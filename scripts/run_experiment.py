@@ -19,6 +19,8 @@ def main():
     ap.add_argument("--model", required=True, choices=models.ALL_KINDS)
     ap.add_argument("--train-root", required=True)
     ap.add_argument("--ood", nargs="*", default=[], help="OOD dataset folders (each with real/ fake/)")
+    ap.add_argument("--ood-fake-only", nargs="*", default=[],
+                    help="folders with only fake/ (no reals): reports recall at thr 0.5, excluded from OOD gap")
     ap.add_argument("--size", type=int, default=32, help="image side; 32 = native CIFAKE")
     ap.add_argument("--max-per-class", type=int, default=None, help="cap images per class (train)")
     ap.add_argument("--max-test-per-class", type=int, default=None)
@@ -69,6 +71,15 @@ def main():
         print(f"  {name:>20s}: acc={m['acc']:.4f} f1={m['f1']:.4f} auc={m['auc']:.4f}")
         if name == "id":
             Xt = X[:256]
+    for path in a.ood_fake_only:
+        name = Path(path).name
+        X, y, _ = data.load_dataset(path, a.size, a.max_test_per_class, a.seed, fake_only=True)
+        s = model.score(X)
+        row[f"recall_{name}"] = round(float((s >= 0.5).mean()), 4)
+        row[f"meanscore_{name}"] = round(float(s.mean()), 4)
+        row[f"n_{name}"] = len(y)
+        np.savez_compressed(f"results/scores/{exp_id}__{name}.npz", y=y, score=s)
+        print(f"  {name:>20s}: recall(fake)={row[f'recall_{name}']:.4f} (fake-only set, no AUC)")
     ood = [v for k, v in aucs.items() if k != "id"]
     row["auc_ood_mean"] = round(float(np.mean(ood)), 4) if ood else ""
     row["ood_gap"] = round(float(metrics.ood_gap(aucs["id"], np.mean(ood))), 4) if ood else ""

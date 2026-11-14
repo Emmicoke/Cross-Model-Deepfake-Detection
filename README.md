@@ -42,6 +42,13 @@ python -c "import torch; print(torch.cuda.is_available())"
 * **OOD generators**: any folder with `real/` and `fake/` sub-folders under `data/ood/<name>/`
   (e.g. a Synthbuster or GenImage subset, or your own Flux/SD outputs). Each folder becomes one OOD test set,
   nothing from them is used for training. Images are centre-cropped and resized to `--size`.
+* **Multi-generator set (recommended for the cross-model claim):** Tiny-GenImage parquet shards from HuggingFace
+  (`TheKernel01/Tiny-GenImage`, CC-BY-NC-SA-4.0) -> `python scripts/prepare_tiny_genimage.py --parquet-dir <dir> --out data --train-gen SD15 --size 256`
+  writes `data/tinygen/{train,test}` and `data/ood/<generator>`. Images are centre-cropped, never resized; smaller ones are skipped and counted.
+* **Fake-only extra generators** (no matched reals, e.g. Flux / SD3.5): put them in `data/ood_fake_only/<name>/fake/`;
+  they are reported as recall of the fake class at threshold 0.5 (no AUC, excluded from the OOD gap).
+* Do not train at 32x32 (CIFAKE) and test on larger images resized down: resizing destroys the artefacts.
+  Use CIFAKE for the pipeline/baselines only.
 * See `data/README.md`. Check JPEG-vs-PNG format bias between real and fake: `scripts/eda.py` reports file formats.
 
 ## Run
@@ -64,7 +71,7 @@ its numbers are meaningless.
 
 ```
 src/fftdet/   data.py features.py augment.py models.py metrics.py
-scripts/      run_experiment.py eda.py plot_results.py make_synthetic_smoke_data.py
+scripts/      run_experiment.py eda.py plot_results.py prepare_tiny_genimage.py make_synthetic_smoke_data.py
 run_all.sh    environment.yml  requirements.txt  data/README.md  results/
 ```
 
