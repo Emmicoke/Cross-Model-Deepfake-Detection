@@ -1,0 +1,60 @@
+== e1_naive_majority_s42  16:15:12
+-> results\tinygen\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e1_naive_stats_s42  16:16:26
+-> results\tinygen\results.csv  (ood_gap=0.0593, 0.1619 ms/img, 1s train)
+== e1_pixel_logreg_s42  16:17:43
+-> results\tinygen\results.csv  (ood_gap=0.0146, 0.1065 ms/img, 1s train)
+== e1_lbp_logreg_s42  16:18:58
+-> results\tinygen\results.csv  (ood_gap=0.1619, 8.8017 ms/img, 30s train)
+== e1_lbp_svm_s42  16:25:22
+-> results\tinygen\results.csv  (ood_gap=0.1279, 9.0824 ms/img, 28s train)
+== e1_fft_radial_logreg_s42  16:31:43
+-> results\tinygen\results.csv  (ood_gap=0.0817, 3.1352 ms/img, 11s train)
+== e1_fft_mlp_s42  16:34:51
+-> results\tinygen\results.csv  (ood_gap=0.0971, 3.5692 ms/img, 16s train)
+== e1_fft_resnet18_s42  16:38:20
+-> results\tinygen\results.csv  (ood_gap=0.1184, 4.6429 ms/img, 292s train)
+== e1_pixel_resnet18_s42  16:48:19
+-> results\tinygen\results.csv  (ood_gap=0.1103, 1.6971 ms/img, 137s train)
+== e1_fft_resnet18_aug_s42  16:54:01
+-> results\tinygen\results.csv  (ood_gap=0.1112, 5.6653 ms/img, 271s train)
+== e1_naive_majority_s43  17:04:03
+-> results\tinygen\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e1_naive_stats_s43  17:05:20
+-> results\tinygen\results.csv  (ood_gap=0.0592, 0.1654 ms/img, 1s train)
+== e1_pixel_logreg_s43  17:06:39
+-> results\tinygen\results.csv  (ood_gap=0.0111, 0.1034 ms/img, 1s train)
+== e1_lbp_logreg_s43  17:07:56
+-> results\tinygen\results.csv  (ood_gap=0.1579, 9.258 ms/img, 30s train)
+== e1_lbp_svm_s43  17:14:28
+-> results\tinygen\results.csv  (ood_gap=0.1258, 9.7922 ms/img, 30s train)
+== e1_fft_radial_logreg_s43  17:20:58
+-> results\tinygen\results.csv  (ood_gap=0.0835, 3.3773 ms/img, 12s train)
+== e1_fft_mlp_s43  17:24:09
+-> results\tinygen\results.csv  (ood_gap=0.1074, 3.1299 ms/img, 16s train)
+== e1_fft_resnet18_s43  17:27:23
+-> results\tinygen\results.csv  (ood_gap=0.1258, 4.6754 ms/img, 253s train)
+== e1_pixel_resnet18_s43  17:36:45
+-> results\tinygen\results.csv  (ood_gap=0.1653, 1.726 ms/img, 281s train)
+== e1_fft_resnet18_aug_s43  17:44:54
+-> results\tinygen\results.csv  (ood_gap=0.0879, 4.6473 ms/img, 104s train)
+== e1_naive_majority_s44  17:51:49
+-> results\tinygen\results.csv  (ood_gap=0.0, 0.0 ms/img, 0s train)
+== e1_naive_stats_s44  17:52:59
+-> results\tinygen\results.csv  (ood_gap=0.0592, 0.1653 ms/img, 1s train)
+== e1_pixel_logreg_s44  17:54:15
+-> results\tinygen\results.csv  (ood_gap=0.0118, 0.0942 ms/img, 1s train)
+== e1_lbp_logreg_s44  17:55:31
+-> results\tinygen\results.csv  (ood_gap=0.1773, 9.3797 ms/img, 30s train)
+== e1_lbp_svm_s44  18:01:59
+-> results\tinygen\results.csv  (ood_gap=0.1416, 8.6621 ms/img, 28s train)
+== e1_fft_radial_logreg_s44  18:08:23
+-> results\tinygen\results.csv  (ood_gap=0.0776, 3.1021 ms/img, 11s train)
+== e1_fft_mlp_s44  18:11:32
+-> results\tinygen\results.csv  (ood_gap=0.1058, 3.1897 ms/img, 16s train)
+== e1_fft_resnet18_s44  18:14:49
+-> results\tinygen\results.csv  (ood_gap=0.1121, 4.8 ms/img, 268s train)
+== e1_pixel_resnet18_s44  18:24:22
+-> results\tinygen\results.csv  (ood_gap=0.1677, 1.6924 ms/img, 184s train)
+== e1_fft_resnet18_aug_s44  18:30:52
+-> results\tinygen\results.csv  (ood_gap=0.119, 4.6606 ms/img, 219s train)

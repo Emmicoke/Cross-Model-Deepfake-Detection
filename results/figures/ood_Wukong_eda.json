@@ -1,0 +1,25 @@
+{
+  "name": "ood_Wukong",
+  "counts": {
+    "real": 1596,
+    "fake": 1596
+  },
+  "formats": {
+    "real": {
+      ".png": 1596
+    },
+    "fake": {
+      ".png": 1596
+    }
+  },
+  "size": 256,
+  "pixel_mean": {
+    "real": 0.4515005946159363,
+    "fake": 0.44742006063461304
+  },
+  "pixel_var": {
+    "real": 0.06761567294597626,
+    "fake": 0.08156298846006393
+  },
+  "radial_profile_l2_gap": 1.3220881223678589
+}

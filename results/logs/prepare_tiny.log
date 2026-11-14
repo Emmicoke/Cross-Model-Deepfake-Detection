@@ -1,0 +1,35 @@
+{
+  "REAL": {
+    "kept": 15963,
+    "skipped_small": 1537
+  },
+  "ADM": {
+    "kept": 2500,
+    "skipped_small": 0
+  },
+  "BigGAN": {
+    "kept": 0,
+    "skipped_small": 2500
+  },
+  "GLIDE": {
+    "kept": 2500,
+    "skipped_small": 0
+  },
+  "Midjourney": {
+    "kept": 2500,
+    "skipped_small": 0
+  },
+  "SD15": {
+    "kept": 2500,
+    "skipped_small": 0
+  },
+  "VQDM": {
+    "kept": 2500,
+    "skipped_small": 0
+  },
+  "Wukong": {
+    "kept": 2500,
+    "skipped_small": 0
+  }
+}
+train gen=SD15; OOD gens=['ADM', 'GLIDE', 'Midjourney', 'VQDM', 'Wukong']; reals: 7981 in-dist / 7982 OOD pool

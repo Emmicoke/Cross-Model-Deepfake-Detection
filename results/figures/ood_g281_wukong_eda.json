@@ -1,0 +1,25 @@
+{
+  "name": "ood_g281_wukong",
+  "counts": {
+    "real": 648,
+    "fake": 648
+  },
+  "formats": {
+    "real": {
+      ".png": 648
+    },
+    "fake": {
+      ".png": 648
+    }
+  },
+  "size": 256,
+  "pixel_mean": {
+    "real": 0.454202264547348,
+    "fake": 0.4506884515285492
+  },
+  "pixel_var": {
+    "real": 0.06563390791416168,
+    "fake": 0.08347759395837784
+  },
+  "radial_profile_l2_gap": 1.3758856058120728
+}

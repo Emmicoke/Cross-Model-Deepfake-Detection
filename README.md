@@ -67,11 +67,27 @@ ROC curves), `results/scores/` (raw scores per test set).
 `scripts/make_synthetic_smoke_data.py` builds a toy dataset to test the code without downloads;
 its numbers are meaningless.
 
+## M2 experiments (as run)
+
+```bash
+python scripts/prepare_281_genimage.py --out data                       # jhutter2/281_Genimage -> data/g281, data/ood/g281_{adm,wukong}
+python scripts/prepare_tiny_genimage.py --parquet-dir <Tiny-GenImage>/data --out data --train-gen SD15 --size 256 --max-per-gen 2500
+python scripts/prepare_fake_only.py --src <dir of fakes> --name <name>  # -> data/ood_fake_only/<name>/fake (Flux, SD3.5, Synthbuster)
+EXP=e2 SEEDS="42 43 44" EPOCHS=20 bash scripts/run_m2.sh                # train g281 (SD v1.5)  -> results/g281/
+EXP=e1 SEEDS="42 43 44" EPOCHS=20 bash scripts/run_m2.sh                # train Tiny-GenImage SD15 -> results/tinygen/
+python scripts/plot_results.py results/g281; python scripts/plot_results.py results/tinygen
+```
+
+Each results dir holds `results.csv`, `experiment_table.md` (per run), `summary_table.md` (mean ± std over seeds),
+`scores/` and `figures/`. EDA output is in `results/figures/`. Note: in both GenImage-derived sets the real images
+are ImageNet JPEGs and the fakes are PNGs, so JPEG traces are a possible shortcut (see the `--augment` variant).
+
 ## Layout
 
 ```
 src/fftdet/   data.py features.py augment.py models.py metrics.py
-scripts/      run_experiment.py eda.py plot_results.py prepare_tiny_genimage.py make_synthetic_smoke_data.py
+scripts/      run_experiment.py eda.py plot_results.py run_m2.sh prepare_tiny_genimage.py prepare_281_genimage.py
+              prepare_fake_only.py make_synthetic_smoke_data.py
 run_all.sh    environment.yml  requirements.txt  data/README.md  results/
 ```
 
